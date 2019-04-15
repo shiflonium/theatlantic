@@ -96,6 +96,7 @@ def index():
 
         db.session.commit()
 
+
     return render_template('index.html', errors=errors)
 
 
