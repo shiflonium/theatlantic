@@ -43,6 +43,15 @@ class Product(Base):
 
 class Order(Base):
     __tablename__ = 'orders'
+
+    def __init__(self, customer_id, product_id, price, status, date):
+        self.customer_id = customer_id
+        self.product_id = product_id
+        self.price = price
+        self.status = status
+        self.date = date
+
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     customer_id = db.Column(db.Integer, ForeignKey("customers.id"))
     product_id = db.Column(db.Integer, ForeignKey("products.id"))
