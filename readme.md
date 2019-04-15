@@ -4,6 +4,7 @@ Coding Challenge for TheAtlantic
 
 **Installation Instructions**
 
+Make sure you have sqlite installed before proceeding
 
 1. Create a virtual environment using virtualenv (this is not mandatory but recommended)
     - `virtualenv -p python3 <virtualenv name>`
