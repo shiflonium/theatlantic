@@ -25,9 +25,24 @@ def index():
             #check if customer in database
             customer = db.session.query(models.Customer).filter(models.Customer.id == customer_id).first()
             if not customer:
-                print(111)
+                c = models.Customer(
+                    line[0],
+                    line[1],
+                    line[2],
+                    line[3],
+                    line[4],
+                    line[5]
+                )
+                db.session.add(c)
             else:
-                print(2222)
+                if customer.address != line[3] or customer.state != line[4] or customer.zip != line[5]:
+                    print(customer.address, line[3])
+                    customer.address = line[3]
+                    customer.state = line[4]
+                    customer.zip = line[5]
+                    db.session.commit()
+
+                db.session.commit()
 
 
 
