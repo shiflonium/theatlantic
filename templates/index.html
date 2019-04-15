@@ -2,13 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TheAtlantic Subscribers Upload</title>
+    <style>
+        li {
+            color: red;
+        }
+    </style>
 </head>
 <body>
+<h3>Upload Nightly Order Data</h3>
 <form method="post" action="{{url_for('index')}}" enctype=multipart/form-data>
-    <label for="file">Upload Dump</label>
-    <input id="file" name="file" type="file">
+    <input id="file" name="file" type="file"><br><br>
     <button type="submit">Submit</button>
 </form>
+{% if errors %}
+    <ul>
+        {% for e in errors %}
+        <li>{{e}}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 </body>
 </html>

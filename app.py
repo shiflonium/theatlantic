@@ -12,6 +12,7 @@ db = SQLAlchemy(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    errors = []
     if request.method == 'POST':
         f = request.files['file']
         filename = secure_filename(f.filename)
@@ -73,13 +74,17 @@ def index():
                     models.Order.product_id == product_id
                 ).first()
 
-                if o:
-                    if o.status == 'new' and o.date < date:
+                if o: # if the order is already in the db
+                    if o.status == 'new' and o.date < date: # if the status of the order is new and was placed before
                         o.status = status
                         db.session.commit()
 
+                else:
+                    errors.append('Order of product {p_name} does not exist for customer {c_name}'.format(
+                        p_name=product_name, c_name=first_name + ' ' + last_name)
+                    )
 
-            else:
+            else: # the order did not exist in the db, we will add this to the list of errors
                 new_order = models.Order(
                     customer_id,
                     product_id,
@@ -91,7 +96,7 @@ def index():
 
         db.session.commit()
 
-    return render_template('index.html')
+    return render_template('index.html', errors=errors)
 
 
 if __name__ == '__main__':
