@@ -13,6 +13,15 @@ Base.query = db_session.query_property()
 
 class Customer(Base):
     __tablename__ = 'customers'
+
+    def __init__(self, id, first_name, last_name, address, state, zip):
+        self.id = id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.address = address
+        self.state = state
+        self.zip = zip
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)
     first_name = db.Column(db.String(50))
     last_name = db.Column(db.String(50))
