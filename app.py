@@ -42,7 +42,18 @@ def index():
                     customer.zip = line[5]
                     db.session.commit()
 
-                db.session.commit()
+            product_id = int(line[7])
+            # check if product in db
+            product = db.session.query(models.Product).filter(models.Product.id == product_id).first()
+            if not product:
+                p = models.Product(
+                    line[7],
+                    line[8],
+                    line[9],
+                )
+                db.session.add(p)
+
+        db.session.commit()
 
 
 

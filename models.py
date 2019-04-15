@@ -32,6 +32,11 @@ class Customer(Base):
 
 class Product(Base):
     __tablename__ = 'products'
+
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)
     name = db.Column(db.String(100))
 
