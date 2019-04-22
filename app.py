@@ -49,7 +49,7 @@ def index():
                 )
                 db.session.add(c)
             else:
-                if customer.address != line[3] or customer.address != state or customer.zip != zip_code:
+                if customer.address != address or customer.state != state or customer.zip != zip_code:
 
                     customer.address = address
                     customer.state = state
